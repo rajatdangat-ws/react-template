@@ -31,12 +31,17 @@ const SearchContainer = styled.div`
   margin: 36px 0;
 `;
 
+const TracksListContainer = styled.div`
+  padding: 12px;
+`;
+
 const SearchBox = styled(Search)`
   max-width: 500px;
 `;
 
 export function ITunes({ dispatchRequestGetSongs, dispatchClearSongs, songs }) {
   const [searchValue, setSearchValue] = useState('');
+  const [currentTrack, setCurrentTrack] = useState();
 
   const handleOnChange = debounce((search) => {
     if (!isEmpty(search)) {
@@ -45,6 +50,15 @@ export function ITunes({ dispatchRequestGetSongs, dispatchClearSongs, songs }) {
       dispatchClearSongs();
     }
   });
+
+  const onActionButtonClick = (audioTrack) => {
+    if (audioTrack !== currentTrack) {
+      if (currentTrack && !currentTrack.paused) {
+        currentTrack.pause();
+      }
+      setCurrentTrack(audioTrack);
+    }
+  };
 
   return (
     <div>
@@ -55,6 +69,7 @@ export function ITunes({ dispatchRequestGetSongs, dispatchClearSongs, songs }) {
       <SearchContainer>
         <SearchBox
           defaultValue={searchValue}
+          data-testid="search-field"
           type="text"
           placeholder="search for songs..."
           onChange={(evt) => setSearchValue(evt.target.value)}
@@ -63,18 +78,22 @@ export function ITunes({ dispatchRequestGetSongs, dispatchClearSongs, songs }) {
           }}
         />
       </SearchContainer>
-      <Row gutter={[16, 16]} justify="space-evenly">
-        {songs.map((song) => (
-          <Col key={song.trackId} xs={24} sm={12} md={6}>
-            <MusicInfoCard
-              trackName={song.trackName}
-              coverImgUrl={song.artworkUrl100}
-              artistName={song.artistName}
-              detailsUrl={`/tracks/${song.trackId}`}
-            />
-          </Col>
-        ))}
-      </Row>
+      <TracksListContainer>
+        <Row gutter={[16, 16]} justify="space-evenly">
+          {songs.map((song) => (
+            <Col data-testid="card-element" key={song.trackId} xs={24} sm={12} md={6}>
+              <MusicInfoCard
+                trackName={song.trackName}
+                coverImgUrl={song.artworkUrl100}
+                artistName={song.artistName}
+                detailsUrl={`/tracks/${song.trackId}`}
+                previewUrl={song.previewUrl}
+                onActionButtonClick={onActionButtonClick}
+              />
+            </Col>
+          ))}
+        </Row>
+      </TracksListContainer>
     </div>
   );
 }
