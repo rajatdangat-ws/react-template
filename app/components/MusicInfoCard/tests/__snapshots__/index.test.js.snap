@@ -1,0 +1,59 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<MusicInfoCard /> should render and match the snapshot 1`] = `
+<body>
+  <div>
+    <div
+      class="ant-card ant-card-bordered"
+    >
+      <div
+        class="ant-card-cover"
+      >
+        <img
+          height="250px"
+          width="250px"
+        />
+      </div>
+      <div
+        class="ant-card-body"
+      >
+        <div
+          class="ant-card-meta"
+        />
+      </div>
+      <ul
+        class="ant-card-actions"
+      >
+        <li
+          style="width: 50%;"
+        >
+          <span>
+            <button
+              class="ant-btn ant-btn-text"
+              type="button"
+            >
+              <span>
+                PREVIEW
+              </span>
+            </button>
+          </span>
+        </li>
+        <li
+          style="width: 50%;"
+        >
+          <span>
+            <button
+              class="ant-btn ant-btn-text"
+              type="button"
+            >
+              <span>
+                MORE
+              </span>
+            </button>
+          </span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</body>
+`;

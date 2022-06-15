@@ -16,7 +16,6 @@ export const { Types: iTunesTypes, Creators: iTunesCreators } = createActions({
   clearSongs: null
 });
 
-/* eslint-disable default-case, no-param-reassign */
 export const iTunesReducer = (state = initialState, action) =>
   produce(state, (draft) => {
     switch (action.type) {

@@ -12,7 +12,7 @@ export function* getTrackInfoFunction(action) {
     const response = yield call(getSongDetails, action.songId);
     const { ok, data } = response;
     if (ok) {
-      yield put(successGetSongDetails(data.results[0]));
+      yield put(successGetSongDetails((data?.results && data.results[0]) || {}));
     } else {
       yield put(errorGetSongDetails(data));
     }

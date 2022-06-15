@@ -38,15 +38,13 @@ const SearchBox = styled(Search)`
 export function ITunes({ dispatchRequestGetSongs, dispatchClearSongs, songs }) {
   const [searchValue, setSearchValue] = useState('');
 
-  const handleOnChange = (search) => {
+  const handleOnChange = debounce((search) => {
     if (!isEmpty(search)) {
       dispatchRequestGetSongs(search);
     } else {
       dispatchClearSongs();
     }
-  };
-
-  const debouncedHandleOnChange = debounce(handleOnChange, 400);
+  });
 
   return (
     <div>
@@ -61,7 +59,7 @@ export function ITunes({ dispatchRequestGetSongs, dispatchClearSongs, songs }) {
           placeholder="search for songs..."
           onChange={(evt) => setSearchValue(evt.target.value)}
           onSearch={(searchText) => {
-            debouncedHandleOnChange(searchText);
+            handleOnChange(searchText);
           }}
         />
       </SearchContainer>
