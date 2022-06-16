@@ -7,7 +7,7 @@
 import React from 'react';
 // import { fireEvent } from '@testing-library/dom'
 import userEvent from '@testing-library/user-event';
-import { renderWithIntl } from '@utils/testUtils';
+import { renderWithIntl, timeout } from '@utils/testUtils';
 import MusicInfoCard from '../index';
 
 const props = {
@@ -63,8 +63,9 @@ describe('<MusicInfoCard />', () => {
     expect(audioEl).toHaveAttribute('src', props.previewUrl);
   });
 
-  it('should play music when clicked on play', async () => {
+  it('should play and pause music when clicked on play and pause buttons', async () => {
     const play = jest.spyOn(window.HTMLMediaElement.prototype, 'play').mockImplementation(() => {});
+    const pause = jest.spyOn(window.HTMLMediaElement.prototype, 'pause').mockImplementation(() => {});
 
     const { getByTestId } = renderWithIntl(<MusicInfoCard {...props} onActionButtonClick={() => {}} />);
     const user = userEvent.setup();
@@ -74,5 +75,12 @@ describe('<MusicInfoCard />', () => {
 
     await user.click(playBtn);
     expect(play).toHaveBeenCalled();
+    expect(playBtn).not.toBeInTheDocument();
+
+    await timeout(500);
+
+    const pauseBtn = getByTestId('pause-button');
+    await user.click(pauseBtn);
+    expect(pause).toHaveBeenCalled();
   });
 });

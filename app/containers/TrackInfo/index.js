@@ -4,7 +4,7 @@
  *
  */
 
-import React, { memo, useEffect } from 'react';
+import React, { memo, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { injectIntl } from 'react-intl';
@@ -19,14 +19,13 @@ import { selectSongs, selectSongById } from '../ITunesProvider/selectors';
 import { selectSongInfo } from './selectors';
 import { trackInfoCreators } from './reducer';
 
-export function TrackInfo({ dispatchGetSongDetails, dispatchClearSongDetails, songs, songInfo }) {
+export function TrackInfo({ dispatchGetSongDetails, dispatchClearSongDetails, songs, songInfo, songDetails }) {
   const params = useParams();
+
+  const [date, setDate] = useState();
 
   useEffect(() => {
     const songId = params.id;
-    // const songDetails = songs.find((song) => song.trackId == songId);
-    // const songDetails = useSelector((state) => selectSongById(state, songId));
-    const songDetails = selectSongById(songs, songId);
     dispatchGetSongDetails(songId, songDetails);
 
     return () => {
@@ -40,6 +39,8 @@ export function TrackInfo({ dispatchGetSongDetails, dispatchClearSongDetails, so
         <title>TrackInfo</title>
         <meta name="description" content="Description of TrackInfo" />
       </Helmet>
+      <button onClick={() => setDate(new Date().toString())}>TEST</button>
+      {date}
       <pre>{JSON.stringify(songInfo, null, 2)}</pre>
     </div>
   );
@@ -49,13 +50,9 @@ TrackInfo.propTypes = {
   dispatchGetSongDetails: PropTypes.func,
   dispatchClearSongDetails: PropTypes.func,
   songs: PropTypes.array,
-  songInfo: PropTypes.object
+  songInfo: PropTypes.object,
+  songDetails: PropTypes.object
 };
-
-const mapStateToProps = createStructuredSelector({
-  songs: selectSongs(),
-  songInfo: selectSongInfo()
-});
 
 function mapDispatchToProps(dispatch) {
   const { requestGetSongDetails, clearSongDetails } = trackInfoCreators;
@@ -65,7 +62,13 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-const withConnect = connect(mapStateToProps, mapDispatchToProps);
+const withConnect = connect((state, props) => {
+  return createStructuredSelector({
+    songs: selectSongs(),
+    songInfo: selectSongInfo(),
+    songDetails: selectSongById(props.match.params.id)
+  });
+}, mapDispatchToProps);
 
 export default compose(withConnect, memo, injectSaga({ key: 'trackInfo', saga }))(TrackInfo);
 
