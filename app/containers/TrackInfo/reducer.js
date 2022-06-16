@@ -16,7 +16,6 @@ export const { Types: trackInfoTypes, Creators: trackInfoCreators } = createActi
   clearSongDetails: {}
 });
 
-/* eslint-disable default-case, no-param-reassign */
 export const trackInfoReducer = (state = initialState, action) =>
   produce(state, (draft) => {
     switch (action.type) {

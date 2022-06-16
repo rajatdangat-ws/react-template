@@ -12,15 +12,14 @@ import { Helmet } from 'react-helmet';
 
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
-// import { useInjectSaga } from '@utils/injectSaga'
 import { injectSaga } from 'redux-injectors';
 import { Input } from 'antd';
 import styled from 'styled-components';
 import isEmpty from 'lodash/isEmpty';
 import debounce from 'lodash/debounce';
-import saga from './saga';
-import { selectSongs, selectError, selectSearchTerm } from './selectors';
-import { iTunesCreators } from './reducer';
+import saga from '../ITunesProvider/saga';
+import { selectSongs, selectError, selectSearchTerm } from '../ITunesProvider/selectors';
+import { iTunesCreators } from '../ITunesProvider/reducer';
 import MusicInfoCard from '@components/MusicInfoCard';
 
 const { Search } = Input;

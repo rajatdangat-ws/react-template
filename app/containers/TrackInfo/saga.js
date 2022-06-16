@@ -9,12 +9,14 @@ export function* getTrackInfoFunction(action) {
   if (action.songDetails) {
     yield put(successGetSongDetails(action.songDetails));
   } else {
-    const response = yield call(getSongDetails, action.songId);
-    const { ok, data } = response;
-    if (ok) {
-      yield put(successGetSongDetails((data?.results && data.results[0]) || {}));
-    } else {
-      yield put(errorGetSongDetails(data));
+    if (action?.songId) {
+      const response = yield call(getSongDetails, action.songId);
+      const { ok, data } = response;
+      if (ok) {
+        yield put(successGetSongDetails((data?.results && data.results[0]) || {}));
+      } else {
+        yield put(errorGetSongDetails(data));
+      }
     }
   }
 }

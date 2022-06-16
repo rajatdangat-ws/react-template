@@ -5,7 +5,7 @@
 import { combineReducers } from 'redux';
 import languageProviderReducer from 'containers/LanguageProvider/reducer';
 // import homeContainerReducer from 'containers/HomeContainer/reducer';
-import iTunesReducer from './containers/ITunes/reducer';
+import iTunesProviderReducer from './containers/ITunesProvider/reducer';
 import trackInfoReducer from './containers/TrackInfo/reducer';
 /**
  * Merges the main reducer with the router state and dynamically injected reducers
@@ -15,7 +15,7 @@ export default function createReducer(injectedReducer = {}) {
     ...injectedReducer,
     language: languageProviderReducer,
     // homeContainer: homeContainerReducer,
-    iTunesContainer: iTunesReducer,
+    iTunesProviderContainer: iTunesProviderReducer,
     trackInfoContainer: trackInfoReducer
   });
 

@@ -1,6 +1,6 @@
 /*
  *
- * ITunes reducer
+ * ITunesProvider reducer
  *
  */
 import produce from 'immer';
@@ -16,7 +16,7 @@ export const { Types: iTunesTypes, Creators: iTunesCreators } = createActions({
   clearSongs: null
 });
 
-export const iTunesReducer = (state = initialState, action) =>
+export const iTunesProviderReducer = (state = initialState, action) =>
   produce(state, (draft) => {
     switch (action.type) {
       case iTunesTypes.SUCCESS_GET_SONGS:
@@ -35,4 +35,4 @@ export const iTunesReducer = (state = initialState, action) =>
     }
   });
 
-export default iTunesReducer;
+export default iTunesProviderReducer;

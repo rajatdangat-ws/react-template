@@ -13,21 +13,25 @@ import { useParams } from 'react-router-dom';
 
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
-// import { useInjectSaga } from '@utils/injectSaga'
 import { injectSaga } from 'redux-injectors';
 import saga from './saga';
-import { selectSongs } from '../ITunes/selectors';
+import { selectSongs, selectSongById } from '../ITunesProvider/selectors';
 import { selectSongInfo } from './selectors';
 import { trackInfoCreators } from './reducer';
 
-export function TrackInfo({ dispatchGetSongDetails, songs, songInfo }) {
-  // useInjectSaga({ key: 'trackInfo', saga })
+export function TrackInfo({ dispatchGetSongDetails, dispatchClearSongDetails, songs, songInfo }) {
   const params = useParams();
 
   useEffect(() => {
     const songId = params.id;
-    const songDetails = songs.find((song) => song.trackId == songId);
+    // const songDetails = songs.find((song) => song.trackId == songId);
+    // const songDetails = useSelector((state) => selectSongById(state, songId));
+    const songDetails = selectSongById(songs, songId);
     dispatchGetSongDetails(songId, songDetails);
+
+    return () => {
+      dispatchClearSongDetails();
+    };
   }, []);
 
   return (
@@ -43,6 +47,7 @@ export function TrackInfo({ dispatchGetSongDetails, songs, songInfo }) {
 
 TrackInfo.propTypes = {
   dispatchGetSongDetails: PropTypes.func,
+  dispatchClearSongDetails: PropTypes.func,
   songs: PropTypes.array,
   songInfo: PropTypes.object
 };
@@ -53,9 +58,10 @@ const mapStateToProps = createStructuredSelector({
 });
 
 function mapDispatchToProps(dispatch) {
-  const { requestGetSongDetails } = trackInfoCreators;
+  const { requestGetSongDetails, clearSongDetails } = trackInfoCreators;
   return {
-    dispatchGetSongDetails: (trackId, songDetails) => dispatch(requestGetSongDetails(trackId, songDetails))
+    dispatchGetSongDetails: (trackId, songDetails) => dispatch(requestGetSongDetails(trackId, songDetails)),
+    dispatchClearSongDetails: () => dispatch(clearSongDetails())
   };
 }
 
