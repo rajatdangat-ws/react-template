@@ -21,6 +21,10 @@ const StyledMeta = styled(Meta)`
   }
 `;
 
+const InfoCard = styled(Card)`
+  max-width: 250px;
+`;
+
 function MusicInfoCard({ trackName, coverImgUrl, artistName, previewUrl, detailsUrl, onActionButtonClick }) {
   const history = useHistory();
   const audioRef = useRef();
@@ -63,9 +67,18 @@ function MusicInfoCard({ trackName, coverImgUrl, artistName, previewUrl, details
 
   return (
     <>
-      <Card
+      <InfoCard
         data-testid="music-info-card"
-        cover={<img src={coverImgUrl} alt={trackName} height="250px" width="250px" style={{ objectFit: 'cover' }} />}
+        cover={
+          <img
+            src={coverImgUrl}
+            alt={trackName}
+            height="250px"
+            width="250px"
+            style={{ maxInlineSize: '100%' }}
+            loading="lazy"
+          />
+        }
         actions={[
           isPlaying ? (
             <PauseCircleOutlined data-testid="pause-button" key="pause" onClick={handlePlayClick} />
@@ -76,7 +89,7 @@ function MusicInfoCard({ trackName, coverImgUrl, artistName, previewUrl, details
         ]}
       >
         <StyledMeta title={trackName} description={artistName} />
-      </Card>
+      </InfoCard>
       <audio data-testid="audio-element" ref={audioRef} src={previewUrl} />
     </>
   );

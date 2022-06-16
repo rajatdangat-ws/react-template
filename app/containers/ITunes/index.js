@@ -14,7 +14,7 @@ import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 // import { useInjectSaga } from '@utils/injectSaga'
 import { injectSaga } from 'redux-injectors';
-import { Input, Col, Row } from 'antd';
+import { Input } from 'antd';
 import styled from 'styled-components';
 import isEmpty from 'lodash/isEmpty';
 import debounce from 'lodash/debounce';
@@ -28,7 +28,7 @@ const { Search } = Input;
 const SearchContainer = styled.div`
   display: flex;
   justify-content: center;
-  margin: 36px 0;
+  margin: 36px 12px;
 `;
 
 const TracksListContainer = styled.div`
@@ -37,6 +37,14 @@ const TracksListContainer = styled.div`
 
 const SearchBox = styled(Search)`
   max-width: 500px;
+`;
+
+const GridLayout = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-column-gap: 12px;
+  grid-row-gap: 24px;
+  justify-items: center;
 `;
 
 export function ITunes({ dispatchRequestGetSongs, dispatchClearSongs, songs }) {
@@ -61,7 +69,7 @@ export function ITunes({ dispatchRequestGetSongs, dispatchClearSongs, songs }) {
   };
 
   return (
-    <div>
+    <>
       <Helmet>
         <title>ITunes</title>
         <meta name="description" content="Description of ITunes" />
@@ -79,22 +87,21 @@ export function ITunes({ dispatchRequestGetSongs, dispatchClearSongs, songs }) {
         />
       </SearchContainer>
       <TracksListContainer>
-        <Row gutter={[16, 16]} justify="space-evenly">
+        <GridLayout>
           {songs.map((song) => (
-            <Col data-testid="card-element" key={song.trackId} xs={24} sm={12} md={6}>
-              <MusicInfoCard
-                trackName={song.trackName}
-                coverImgUrl={song.artworkUrl100}
-                artistName={song.artistName}
-                detailsUrl={`/tracks/${song.trackId}`}
-                previewUrl={song.previewUrl}
-                onActionButtonClick={onActionButtonClick}
-              />
-            </Col>
+            <MusicInfoCard
+              key={song.trackId}
+              trackName={song.trackName}
+              coverImgUrl={song.artworkUrl250}
+              artistName={song.artistName}
+              detailsUrl={`/tracks/${song.trackId}`}
+              previewUrl={song.previewUrl}
+              onActionButtonClick={onActionButtonClick}
+            />
           ))}
-        </Row>
+        </GridLayout>
       </TracksListContainer>
-    </div>
+    </>
   );
 }
 

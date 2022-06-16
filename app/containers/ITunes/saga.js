@@ -10,7 +10,14 @@ export function* getSongsFunction(action) {
   const response = yield call(getSongs, action.searchTerm);
   const { data, ok } = response;
   if (ok) {
-    yield put(successGetSongs(data?.results || []));
+    const results = data?.results || [];
+    const newResults = results.map((item) => {
+      return {
+        ...item,
+        artworkUrl250: item.artworkUrl100.replace('100x100bb.jpg', '250x250bb.jpg')
+      };
+    });
+    yield put(successGetSongs(newResults));
   } else {
     yield put(errorGetSongs(data));
   }

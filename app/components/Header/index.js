@@ -19,13 +19,14 @@ const StyledHeader = styled(Layout.Header)`
     }
     display: flex;
     justify-content: center;
+    align-items: center;
     background-color: ${colors.primary};
   }
 `;
 const Logo = styled.img`
-  height: 5rem;
+  height: 4rem;
   width: auto;
-  margin-top: 1rem;
+  margin-right: 12px;
 `;
 const Title = styled(T)`
   && {
@@ -39,7 +40,7 @@ function Header(props) {
   return (
     <StyledHeader {...props} data-testid="header">
       <Logo alt="logo" src={logo} />
-      <Title type="heading" id="wednesday_solutions" />
+      <Title type="heading" id="my_tunes" />
     </StyledHeader>
   );
 }
