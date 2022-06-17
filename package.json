@@ -81,6 +81,7 @@
   },
   "pre-commit": "lint:staged",
   "dependencies": {
+    "@ant-design/icons": "^4.7.0",
     "@babel/helper-regex": "^7.10.5",
     "@formatjs/intl-relativetimeformat": "^9.1.6",
     "@testing-library/jest-dom": "^5.14.1",
@@ -146,6 +147,7 @@
     "@storybook/addon-links": "^5.2.1",
     "@storybook/addons": "^5.2.1",
     "@storybook/react": "^5.2.1",
+    "@testing-library/user-event": "^14.2.0",
     "add-asset-html-webpack-plugin": "3.2.0",
     "axios-mock-adapter": "^1.17.0",
     "babel-core": "7.0.0-bridge.0",

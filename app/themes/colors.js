@@ -5,9 +5,9 @@
  * That allows to change them more easily later on.
  */
 
-const primary = '#fcedda';
+const primary = '#C7D36F';
 const text = '#212529';
-const secondary = '#f8c49c';
+const secondary = '#7B6FD3';
 const success = '#28a745';
 const error = '#dc3545';
 const gotoStories = '#1890ff';
