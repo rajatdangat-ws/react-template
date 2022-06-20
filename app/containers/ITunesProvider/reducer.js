@@ -26,7 +26,6 @@ export const iTunesProviderReducer = (state = initialState, action) =>
         draft.error = get(action.error, 'message', 'something_went_wrong');
         break;
       case iTunesTypes.CLEAR_SONGS:
-        draft.searchTerm = null;
         draft.error = null;
         draft.songs = [];
         break;

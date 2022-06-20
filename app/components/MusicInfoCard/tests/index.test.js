@@ -64,23 +64,44 @@ describe('<MusicInfoCard />', () => {
   });
 
   it('should play and pause music when clicked on play and pause buttons', async () => {
-    const play = jest.spyOn(window.HTMLMediaElement.prototype, 'play').mockImplementation(() => {});
-    const pause = jest.spyOn(window.HTMLMediaElement.prototype, 'pause').mockImplementation(() => {});
-
     const { getByTestId } = renderWithIntl(<MusicInfoCard {...props} onActionButtonClick={() => {}} />);
     const user = userEvent.setup();
+    const audioElement = getByTestId('audio-element');
+    await timeout(500);
 
-    const playBtn = getByTestId('play-button');
+    let playBtn = getByTestId('play-button');
     expect(playBtn).toBeInTheDocument();
 
     await user.click(playBtn);
-    expect(play).toHaveBeenCalled();
     expect(playBtn).not.toBeInTheDocument();
+    expect(audioElement.paused).toBe(false);
 
     await timeout(500);
 
     const pauseBtn = getByTestId('pause-button');
+    expect(pauseBtn).toBeInTheDocument();
+
     await user.click(pauseBtn);
-    expect(pause).toHaveBeenCalled();
+    expect(audioElement.paused).toBe(true);
+    expect(pauseBtn).not.toBeInTheDocument();
+    playBtn = getByTestId('play-button');
+    expect(playBtn).toBeInTheDocument();
+  });
+
+  it('should update the UI when the music finishes playing', async () => {
+    const { getByTestId } = renderWithIntl(<MusicInfoCard {...props} onActionButtonClick={() => {}} />);
+    const user = userEvent.setup();
+
+    let playBtn = getByTestId('play-button');
+    const audioElement = getByTestId('audio-element');
+
+    expect(playBtn).toBeInTheDocument();
+    await user.click(playBtn);
+    const pauseBtn = getByTestId('pause-button');
+    expect(pauseBtn).toBeInTheDocument();
+    await timeout(500);
+    audioElement.emulateStop();
+    playBtn = getByTestId('play-button');
+    expect(playBtn).toBeInTheDocument();
   });
 });

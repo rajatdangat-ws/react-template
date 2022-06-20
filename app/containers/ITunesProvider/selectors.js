@@ -21,6 +21,3 @@ export const selectSongById = (songId) =>
   });
 
 export const selectError = () => createSelector(selectITunesProviderDomain, (substate) => get(substate, 'error'));
-
-export const selectSearchTerm = () =>
-  createSelector(selectITunesProviderDomain, (substate) => get(substate, 'searchTerm'));

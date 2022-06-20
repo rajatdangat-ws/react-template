@@ -18,7 +18,7 @@ import styled from 'styled-components';
 import isEmpty from 'lodash/isEmpty';
 import debounce from 'lodash/debounce';
 import saga from '../ITunesProvider/saga';
-import { selectSongs, selectError, selectSearchTerm } from '../ITunesProvider/selectors';
+import { selectSongs, selectError } from '../ITunesProvider/selectors';
 import { iTunesCreators } from '../ITunesProvider/reducer';
 import MusicInfoCard from '@components/MusicInfoCard';
 
@@ -112,11 +112,10 @@ ITunes.propTypes = {
 
 const mapStateToProps = createStructuredSelector({
   songs: selectSongs(),
-  error: selectError(),
-  searchTerm: selectSearchTerm()
+  error: selectError()
 });
 
-function mapDispatchToProps(dispatch) {
+export function mapDispatchToProps(dispatch) {
   const { requestGetSongs, clearSongs } = iTunesCreators;
   return {
     dispatchRequestGetSongs: (searchTerm) => dispatch(requestGetSongs(searchTerm)),
