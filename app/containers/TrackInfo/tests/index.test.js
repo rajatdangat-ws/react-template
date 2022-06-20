@@ -18,7 +18,9 @@ describe('<TrackInfo /> container tests', () => {
     // submitSpy = jest.fn()
   });
   it('should render and match the snapshot', () => {
-    const { baseElement } = renderProvider(<TrackInfo dispatchGetSongDetails={() => {}} />);
+    const { baseElement } = renderProvider(
+      <TrackInfo dispatchGetSongDetails={() => {}} dispatchClearSongDetails={() => {}} />
+    );
     expect(baseElement).toMatchSnapshot();
   });
 

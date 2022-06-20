@@ -118,13 +118,12 @@ describe('<ITunes /> container tests', () => {
     expect(firstPlayBtn).toBeInTheDocument();
     await user.click(firstPlayBtn);
     // expect(firstAudioElement.paused).toBe(false);
-    const pauseBtn = getAllByTestId('pause-button')[0];
-    expect(pauseBtn).toBeInTheDocument();
 
     await timeout(500);
 
     expect(secondPlayBtn).toBeInTheDocument();
     // expect(secondAudioElement.paused).toBe(true);
+    const pauseBtn = getAllByTestId('pause-button')[0];
     await user.click(secondPlayBtn);
     // expect(firstAudioElement.paused).toBe(true);
     // expect(secondAudioElement.paused).toBe(false);
