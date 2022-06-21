@@ -15,7 +15,9 @@ export function* getTrackInfoFunction(action) {
       if (ok) {
         const songDetails = data?.results && data.results[0];
         if (songDetails) {
-          songDetails.releaseYear = new Date(songDetails.releaseDate).getFullYear().toString();
+          songDetails.releaseYear = songDetails?.releaseDate
+            ? new Date(songDetails.releaseDate).getFullYear().toString()
+            : 'NA';
           songDetails.artworkUrl250 = songDetails.artworkUrl100.replace('100x100bb.jpg', '250x250bb.jpg');
         }
         yield put(successGetSongDetails(songDetails || {}));

@@ -14,19 +14,19 @@ exports[`<TrackInfo /> container tests should render and match the snapshot 1`] 
           width="250px"
         />
         <h2
-          class="TrackInfo__TrackTitle-sc-15fksvm-2 iQqPUk"
+          class="TrackInfo__TrackTitle-sc-15fksvm-2 bgzCKO"
         >
           test track 1
         </h2>
         <a
-          class="TrackInfo__TrackArtist-sc-15fksvm-3 cUxOut"
+          class="TrackInfo__TrackArtist-sc-15fksvm-3 fQrehn"
           rel="noreferrer noopener"
           target="__blank"
         >
           test artist 1
         </a>
         <p
-          class="TrackInfo__GenreName-sc-15fksvm-5 kZqHfi"
+          class="TrackInfo__GenreName-sc-15fksvm-5 jHPtqy"
         >
           hard rock
            · 
@@ -60,9 +60,12 @@ exports[`<TrackInfo /> container tests should render and match the snapshot 1`] 
                 />
               </svg>
             </span>
-            <span>
+            <p
+              class="T__StyledText-gjlic1-0 kYcyRq TrackInfo__ButtonText-sc-15fksvm-6 kTyeME"
+              data-testid="t"
+            >
               Play
-            </span>
+            </p>
           </a>
         </div>
       </div>

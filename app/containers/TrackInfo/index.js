@@ -22,6 +22,8 @@ import { selectSongById } from '../ITunesProvider/selectors';
 import { selectSongInfo } from './selectors';
 import { trackInfoCreators } from './reducer';
 import colors from '@app/themes/colors';
+import fonts from '@app/themes/fonts';
+import { T } from '@components/T';
 
 const TrackInfoContainer = styled.div`
   display: flex;
@@ -37,6 +39,7 @@ const Artwork = styled.img`
 
 const TrackTitle = styled.h2`
   font-size: 26px;
+  font-size: ${fonts.dynamicFontSize(fonts.size.big, 1, 0.5)};
   font-weight: bold;
   margin: 0;
   margin-top: 12px;
@@ -45,7 +48,7 @@ const TrackTitle = styled.h2`
 const TrackArtist = styled.a`
   text-decoration: none;
   text-transform: uppercase;
-  font-size: 24px;
+  font-size: ${fonts.dynamicFontSize(fonts.size.regular, 1, 0.5)};
   font-weight: 300;
   color: ${colors.secondary};
   margin: 0;
@@ -67,6 +70,11 @@ const ButtonsContainer = styled.div`
 
 const GenreName = styled.p`
   text-transform: uppercase;
+  font-size: ${fonts.dynamicFontSize(fonts.size.small, 1, 0.5)};
+`;
+
+const ButtonText = styled(T)`
+  margin-left: 4px;
 `;
 
 export function TrackInfo({ dispatchGetSongDetails, dispatchClearSongDetails, songInfo, songDetails }) {
@@ -88,25 +96,25 @@ export function TrackInfo({ dispatchGetSongDetails, dispatchClearSongDetails, so
         <meta name="description" content="Description of TrackInfo" />
       </Helmet>
       <TrackInfoContainer>
-        <Artwork src={songInfo.artworkUrl250} width="250px" height="250px" alt={songInfo.trackName} />
-        <TrackTitle>{songInfo.trackName}</TrackTitle>
-        <TrackArtist href={songInfo.artistViewUrl} target="__blank" rel="noreferrer noopener">
-          {songInfo.artistName}
+        <Artwork src={songInfo?.artworkUrl250} width="250px" height="250px" alt={songInfo?.trackName} />
+        <TrackTitle>{songInfo?.trackName}</TrackTitle>
+        <TrackArtist href={songInfo?.artistViewUrl} target="__blank" rel="noreferrer noopener">
+          {songInfo?.artistName}
         </TrackArtist>
         <GenreName>
-          {songInfo.primaryGenreName} · {songInfo.releaseYear}
+          {songInfo?.primaryGenreName} · {songInfo?.releaseYear}
         </GenreName>
         <ButtonsContainer>
           <Button
             type="primary"
             shape="round"
-            href={songInfo.trackViewUrl}
+            href={songInfo?.trackViewUrl}
             target="__blank"
             rel="noreferrer noopener"
             size="medium"
             icon={<CaretRightOutlined />}
           >
-            Play
+            <ButtonText id="play" />
           </Button>
         </ButtonsContainer>
       </TrackInfoContainer>
