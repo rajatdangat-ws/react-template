@@ -64,11 +64,6 @@ describe('ITunesProvider selector tests', () => {
     expect(songByIdSelector(mockedState)).toEqual(songs[2]);
   });
 
-  it('should return {} when data for songId is not present', () => {
-    const songByIdSelector = selectSongById(3);
-    expect(songByIdSelector(mockedState)).toEqual({});
-  });
-
   it('should select global state', () => {
     const selector = selectITunesProviderDomain(initialState);
     expect(selector).toEqual(initialState);

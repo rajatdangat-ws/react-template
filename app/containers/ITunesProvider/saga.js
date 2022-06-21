@@ -12,12 +12,9 @@ export function* getSongsFunction(action) {
     const results = data?.results || [];
     const songs = {};
     results.forEach((item) => {
-      // return {
-      //   ...item,
-      //   artworkUrl250: item.artworkUrl100.replace('100x100bb.jpg', '250x250bb.jpg')
-      // };
       songs[item.trackId] = {
         ...item,
+        releaseYear: new Date(item.releaseDate).getFullYear().toString(),
         artworkUrl250: item.artworkUrl100.replace('100x100bb.jpg', '250x250bb.jpg')
       };
     });

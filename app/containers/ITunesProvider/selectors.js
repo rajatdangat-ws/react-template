@@ -17,7 +17,7 @@ export const selectSongs = () => createSelector(selectITunesProviderDomain, (sub
 
 export const selectSongById = (songId) =>
   createSelector(selectSongs(), (songs) => {
-    return songs[songId] || {};
+    return songs && songs[songId];
   });
 
 export const selectError = () => createSelector(selectITunesProviderDomain, (substate) => get(substate, 'error'));

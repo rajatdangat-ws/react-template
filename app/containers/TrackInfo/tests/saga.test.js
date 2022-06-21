@@ -18,7 +18,9 @@ describe('TrackInfo saga tests', () => {
     coverImgUrl: 'image url 1',
     artistName: 'test artist 1',
     previewUrl: 'preview url 1',
-    detailsUrl: 'details url 1'
+    detailsUrl: 'details url 1',
+    artworkUrl100: '100x100bb.jpg',
+    releaseDate: '2006-11-07T12:00:00Z'
   };
   let getSongDetailsGenerator = getTrackInfoFunction({ songId });
 

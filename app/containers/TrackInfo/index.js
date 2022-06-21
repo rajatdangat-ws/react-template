@@ -94,7 +94,7 @@ export function TrackInfo({ dispatchGetSongDetails, dispatchClearSongDetails, so
           {songInfo.artistName}
         </TrackArtist>
         <GenreName>
-          {songInfo.primaryGenreName} · {new Date(songInfo.releaseDate).getFullYear()}
+          {songInfo.primaryGenreName} · {songInfo.releaseYear}
         </GenreName>
         <ButtonsContainer>
           <Button
