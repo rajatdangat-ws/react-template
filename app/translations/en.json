@@ -16,5 +16,6 @@
   "wednesday_solutions": "Wednesday Solutions",
   "my_tunes": "My Tunes",
   "play": "Play",
-  "song_search_default": "Search for a song by entering it's name in the search box"
+  "song_search_default": "Search for a song by entering it's name in the search box",
+  "goto_tracks": "Go to Tracks"
 }

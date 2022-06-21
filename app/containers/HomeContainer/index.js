@@ -43,6 +43,9 @@ const Container = styled.div`
 const RightContent = styled.div`
   display: flex;
   align-self: flex-end;
+  & > :not(:last-child) {
+    margin-right: 8px;
+  }
 `;
 
 const StyledT = styled(T)`
@@ -138,9 +141,14 @@ export function HomeContainer({
     window.location.reload();
   };
 
+  const handleTracksClick = () => {
+    history.push('/tracks');
+  };
+
   return (
     <Container maxwidth={maxwidth} padding={padding}>
       <RightContent>
+        <StyledT onClick={handleTracksClick} id="goto_tracks" />
         <StyledT onClick={handleStoriesClick} data-testid="redirect" id="stories" />
       </RightContent>
       <CustomCard title={intl.formatMessage({ id: 'repo_search' })} maxwidth={maxwidth}>

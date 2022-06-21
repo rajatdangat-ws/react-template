@@ -4,7 +4,7 @@
 
 import { combineReducers } from 'redux';
 import languageProviderReducer from 'containers/LanguageProvider/reducer';
-// import homeContainerReducer from 'containers/HomeContainer/reducer';
+import homeContainerReducer from 'containers/HomeContainer/reducer';
 import iTunesProviderReducer from './containers/ITunesProvider/reducer';
 import trackInfoReducer from './containers/TrackInfo/reducer';
 /**
@@ -14,7 +14,7 @@ export default function createReducer(injectedReducer = {}) {
   const rootReducer = combineReducers({
     ...injectedReducer,
     language: languageProviderReducer,
-    // homeContainer: homeContainerReducer,
+    homeContainer: homeContainerReducer,
     iTunesProviderContainer: iTunesProviderReducer,
     trackInfoContainer: trackInfoReducer
   });
