@@ -97,12 +97,12 @@ export function TrackInfo({ dispatchGetSongDetails, dispatchClearSongDetails, so
       </Helmet>
       <TrackInfoContainer>
         <Artwork src={songInfo?.artworkUrl250} width="250px" height="250px" alt={songInfo?.trackName} />
-        <TrackTitle>{songInfo?.trackName}</TrackTitle>
-        <TrackArtist href={songInfo?.artistViewUrl} target="__blank" rel="noreferrer noopener">
-          {songInfo?.artistName}
+        <TrackTitle>{songInfo?.trackName || 'NA'}</TrackTitle>
+        <TrackArtist href={songInfo?.artistViewUrl || 'NA'} target="__blank" rel="noreferrer noopener">
+          {songInfo?.artistName || 'NA'}
         </TrackArtist>
         <GenreName>
-          {songInfo?.primaryGenreName} · {songInfo?.releaseYear}
+          {songInfo?.primaryGenreName || 'NA'} · {songInfo?.releaseYear || 'NA'}
         </GenreName>
         <ButtonsContainer>
           <Button

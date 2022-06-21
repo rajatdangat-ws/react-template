@@ -21,7 +21,8 @@ const songDetails = {
   primaryGenreName: 'hard rock',
   releaseDate: '2006-11-07T12:00:00Z',
   releaseYear: '2006',
-  trackViewUrl: 'track view url'
+  trackViewUrl: 'track view url',
+  artistViewUrl: 'artist view url'
 };
 
 describe('<TrackInfo /> container tests', () => {

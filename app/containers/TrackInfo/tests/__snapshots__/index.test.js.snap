@@ -20,6 +20,7 @@ exports[`<TrackInfo /> container tests should render and match the snapshot 1`] 
         </h2>
         <a
           class="TrackInfo__TrackArtist-sc-15fksvm-3 fQrehn"
+          href="artist view url"
           rel="noreferrer noopener"
           target="__blank"
         >
