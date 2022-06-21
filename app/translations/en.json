@@ -15,5 +15,6 @@
   "repo_stars_unavailable": "Repository stars are unavaiable",
   "wednesday_solutions": "Wednesday Solutions",
   "my_tunes": "My Tunes",
-  "play": "Play"
+  "play": "Play",
+  "song_search_default": "Search for a song by entering it's name in the search box"
 }

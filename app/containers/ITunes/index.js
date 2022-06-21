@@ -21,6 +21,7 @@ import saga from '../ITunesProvider/saga';
 import { selectSongs, selectError } from '../ITunesProvider/selectors';
 import { iTunesCreators } from '../ITunesProvider/reducer';
 import MusicInfoCard from '@components/MusicInfoCard';
+import { T } from '@components/T';
 
 const { Search } = Input;
 
@@ -69,21 +70,24 @@ export function ITunes({ dispatchRequestGetSongs, dispatchClearSongs, songs }) {
 
   const trackCards = useMemo(
     () =>
-      songs &&
-      Object.keys(songs).map((key) => {
-        const song = songs[key];
-        return (
-          <MusicInfoCard
-            key={key}
-            trackName={song.trackName}
-            coverImgUrl={song.artworkUrl250}
-            artistName={song.artistName}
-            detailsUrl={`/tracks/${song.trackId}`}
-            previewUrl={song.previewUrl}
-            onActionButtonClick={onActionButtonClick}
-          />
-        );
-      }),
+      songs && Object.keys(songs).length ? (
+        Object.keys(songs).map((key) => {
+          const song = songs[key];
+          return (
+            <MusicInfoCard
+              key={key}
+              trackName={song.trackName}
+              coverImgUrl={song.artworkUrl250}
+              artistName={song.artistName}
+              detailsUrl={`/tracks/${song.trackId}`}
+              previewUrl={song.previewUrl}
+              onActionButtonClick={onActionButtonClick}
+            />
+          );
+        })
+      ) : (
+        <T id="song_search_default" />
+      ),
     [songs, currentTrack]
   );
 
