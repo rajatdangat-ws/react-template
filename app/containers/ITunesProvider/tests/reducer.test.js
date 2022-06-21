@@ -13,8 +13,8 @@ describe('ITunesProvider reducer tests', () => {
   });
 
   it('should ensure that the songs data is present when SUCCESS_GET_SONGS is dispatched', () => {
-    const songs = [
-      {
+    const songs = {
+      1: {
         trackName: 'test track 1',
         trackId: 1,
         coverImgUrl: 'image url 1',
@@ -22,7 +22,7 @@ describe('ITunesProvider reducer tests', () => {
         previewUrl: 'preview url 1',
         detailsUrl: 'details url 1'
       },
-      {
+      2: {
         trackName: 'test track 2',
         trackId: 2,
         coverImgUrl: 'image url 2',
@@ -30,7 +30,7 @@ describe('ITunesProvider reducer tests', () => {
         previewUrl: 'preview url 2',
         detailsUrl: 'details url 2'
       }
-    ];
+    };
     const expectedResult = { ...state, songs };
     expect(
       iTunesProviderReducer(state, {

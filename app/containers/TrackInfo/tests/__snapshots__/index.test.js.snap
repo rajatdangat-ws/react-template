@@ -4,7 +4,68 @@ exports[`<TrackInfo /> container tests should render and match the snapshot 1`] 
 <body>
   <div>
     <div>
-      <pre />
+      <div
+        class="TrackInfo__TrackInfoContainer-sc-15fksvm-0 dfA-Dmp"
+      >
+        <img
+          alt="test track 1"
+          class="TrackInfo__Artwork-sc-15fksvm-1 faRTqr"
+          height="250px"
+          width="250px"
+        />
+        <h2
+          class="TrackInfo__TrackTitle-sc-15fksvm-2 iQqPUk"
+        >
+          test track 1
+        </h2>
+        <a
+          class="TrackInfo__TrackArtist-sc-15fksvm-3 cUxOut"
+          rel="noreferrer noopener"
+          target="__blank"
+        >
+          test artist 1
+        </a>
+        <p
+          class="TrackInfo__GenreName-sc-15fksvm-5 kZqHfi"
+        >
+          hard rock
+           · 
+          2006
+        </p>
+        <div
+          class="TrackInfo__ButtonsContainer-sc-15fksvm-4 xgcWQ"
+        >
+          <a
+            class="ant-btn ant-btn-primary ant-btn-round"
+            href="track view url"
+            rel="noreferrer noopener"
+            target="__blank"
+          >
+            <span
+              aria-label="caret-right"
+              class="anticon anticon-caret-right"
+              role="img"
+            >
+              <svg
+                aria-hidden="true"
+                data-icon="caret-right"
+                fill="currentColor"
+                focusable="false"
+                height="1em"
+                viewBox="0 0 1024 1024"
+                width="1em"
+              >
+                <path
+                  d="M715.8 493.5L335 165.1c-14.2-12.2-35-1.2-35 18.5v656.8c0 19.7 20.8 30.7 35 18.5l380.8-328.4c10.9-9.4 10.9-27.6 0-37z"
+                />
+              </svg>
+            </span>
+            <span>
+              Play
+            </span>
+          </a>
+        </div>
+      </div>
     </div>
   </div>
 </body>

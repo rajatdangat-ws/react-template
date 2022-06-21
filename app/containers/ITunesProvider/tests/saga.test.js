@@ -48,7 +48,10 @@ describe('ITunesProvider saga tests', () => {
         }
       ]
     };
-    const songsData = { ...songsResponse, results: [{ ...songsResponse.results[0], artworkUrl250: '250x250bb.jpg' }] };
+    const songsData = {
+      ...songsResponse,
+      results: { [songsResponse.results[0].trackId]: { ...songsResponse.results[0], artworkUrl250: '250x250bb.jpg' } }
+    };
     expect(getSongsGenerator.next(apiResponseGenerator(true, songsResponse)).value).toEqual(
       put({
         type: iTunesTypes.SUCCESS_GET_SONGS,

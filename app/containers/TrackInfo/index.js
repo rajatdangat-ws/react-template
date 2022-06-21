@@ -6,6 +6,9 @@
 
 import React, { memo, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
+import { Button } from 'antd';
+import { CaretRightOutlined } from '@ant-design/icons';
 import { connect } from 'react-redux';
 import { injectIntl } from 'react-intl';
 import { Helmet } from 'react-helmet';
@@ -15,11 +18,58 @@ import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import { injectSaga } from 'redux-injectors';
 import saga from './saga';
-import { selectSongs, selectSongById } from '../ITunesProvider/selectors';
+import { selectSongById } from '../ITunesProvider/selectors';
 import { selectSongInfo } from './selectors';
 import { trackInfoCreators } from './reducer';
+import colors from '@app/themes/colors';
 
-export function TrackInfo({ dispatchGetSongDetails, dispatchClearSongDetails, songs, songInfo, songDetails }) {
+const TrackInfoContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 24px;
+  text-align: center;
+`;
+
+const Artwork = styled.img`
+  border-radius: 8px;
+`;
+
+const TrackTitle = styled.h2`
+  font-size: 26px;
+  font-weight: bold;
+  margin: 0;
+  margin-top: 12px;
+`;
+
+const TrackArtist = styled.a`
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 24px;
+  font-weight: 300;
+  color: ${colors.secondary};
+  margin: 0;
+
+  &:hover {
+    text-decoration: underline;
+    color: ${colors.secondary};
+  }
+`;
+
+const ButtonsContainer = styled.div`
+  margin-top: 18px;
+
+  & > .ant-btn {
+    display: inline-flex;
+    align-items: center;
+  }
+`;
+
+const GenreName = styled.p`
+  text-transform: uppercase;
+`;
+
+export function TrackInfo({ dispatchGetSongDetails, dispatchClearSongDetails, songInfo, songDetails }) {
   const params = useParams();
 
   useEffect(() => {
@@ -37,7 +87,29 @@ export function TrackInfo({ dispatchGetSongDetails, dispatchClearSongDetails, so
         <title>TrackInfo</title>
         <meta name="description" content="Description of TrackInfo" />
       </Helmet>
-      <pre>{JSON.stringify(songInfo, null, 2)}</pre>
+      <TrackInfoContainer>
+        <Artwork src={songInfo.artworkUrl250} width="250px" height="250px" alt={songInfo.trackName} />
+        <TrackTitle>{songInfo.trackName}</TrackTitle>
+        <TrackArtist href={songInfo.artistViewUrl} target="__blank" rel="noreferrer noopener">
+          {songInfo.artistName}
+        </TrackArtist>
+        <GenreName>
+          {songInfo.primaryGenreName} · {new Date(songInfo.releaseDate).getFullYear()}
+        </GenreName>
+        <ButtonsContainer>
+          <Button
+            type="primary"
+            shape="round"
+            href={songInfo.trackViewUrl}
+            target="__blank"
+            rel="noreferrer noopener"
+            size="medium"
+            icon={<CaretRightOutlined />}
+          >
+            Play
+          </Button>
+        </ButtonsContainer>
+      </TrackInfoContainer>
     </div>
   );
 }
@@ -45,14 +117,12 @@ export function TrackInfo({ dispatchGetSongDetails, dispatchClearSongDetails, so
 TrackInfo.propTypes = {
   dispatchGetSongDetails: PropTypes.func,
   dispatchClearSongDetails: PropTypes.func,
-  songs: PropTypes.array,
   songInfo: PropTypes.object,
   songDetails: PropTypes.object
 };
 
 const mapStateToProps = (state, props) => {
   return createStructuredSelector({
-    songs: selectSongs(),
     songInfo: selectSongInfo(),
     songDetails: selectSongById(props.match.params.id)
   });

@@ -10,13 +10,18 @@ export function* getSongsFunction(action) {
   const { data, ok } = response;
   if (ok) {
     const results = data?.results || [];
-    const newResults = results.map((item) => {
-      return {
+    const songs = {};
+    results.forEach((item) => {
+      // return {
+      //   ...item,
+      //   artworkUrl250: item.artworkUrl100.replace('100x100bb.jpg', '250x250bb.jpg')
+      // };
+      songs[item.trackId] = {
         ...item,
         artworkUrl250: item.artworkUrl100.replace('100x100bb.jpg', '250x250bb.jpg')
       };
     });
-    yield put(successGetSongs(newResults));
+    yield put(successGetSongs(songs));
   } else {
     yield put(errorGetSongs(data));
   }

@@ -87,17 +87,21 @@ export function ITunes({ dispatchRequestGetSongs, dispatchClearSongs, songs }) {
       </SearchContainer>
       <TracksListContainer>
         <GridLayout>
-          {songs.map((song) => (
-            <MusicInfoCard
-              key={song.trackId}
-              trackName={song.trackName}
-              coverImgUrl={song.artworkUrl250}
-              artistName={song.artistName}
-              detailsUrl={`/tracks/${song.trackId}`}
-              previewUrl={song.previewUrl}
-              onActionButtonClick={onActionButtonClick}
-            />
-          ))}
+          {songs &&
+            Object.keys(songs).map((key) => {
+              const song = songs[key];
+              return (
+                <MusicInfoCard
+                  key={key}
+                  trackName={song.trackName}
+                  coverImgUrl={song.artworkUrl250}
+                  artistName={song.artistName}
+                  detailsUrl={`/tracks/${song.trackId}`}
+                  previewUrl={song.previewUrl}
+                  onActionButtonClick={onActionButtonClick}
+                />
+              );
+            })}
         </GridLayout>
       </TracksListContainer>
     </>
@@ -107,7 +111,7 @@ export function ITunes({ dispatchRequestGetSongs, dispatchClearSongs, songs }) {
 ITunes.propTypes = {
   dispatchRequestGetSongs: PropTypes.func,
   dispatchClearSongs: PropTypes.func,
-  songs: PropTypes.array
+  songs: PropTypes.object
 };
 
 const mapStateToProps = createStructuredSelector({
