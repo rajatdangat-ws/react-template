@@ -4,7 +4,7 @@
  *
  */
 
-import React, { memo, useState } from 'react';
+import React, { memo, useMemo, useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { injectIntl } from 'react-intl';
@@ -67,6 +67,26 @@ export function ITunes({ dispatchRequestGetSongs, dispatchClearSongs, songs }) {
     }
   };
 
+  const trackCards = useMemo(
+    () =>
+      songs &&
+      Object.keys(songs).map((key) => {
+        const song = songs[key];
+        return (
+          <MusicInfoCard
+            key={key}
+            trackName={song.trackName}
+            coverImgUrl={song.artworkUrl250}
+            artistName={song.artistName}
+            detailsUrl={`/tracks/${song.trackId}`}
+            previewUrl={song.previewUrl}
+            onActionButtonClick={onActionButtonClick}
+          />
+        );
+      }),
+    [songs, currentTrack]
+  );
+
   return (
     <>
       <Helmet>
@@ -86,19 +106,7 @@ export function ITunes({ dispatchRequestGetSongs, dispatchClearSongs, songs }) {
         />
       </SearchContainer>
       <TracksListContainer>
-        <GridLayout>
-          {songs.map((song) => (
-            <MusicInfoCard
-              key={song.trackId}
-              trackName={song.trackName}
-              coverImgUrl={song.artworkUrl250}
-              artistName={song.artistName}
-              detailsUrl={`/tracks/${song.trackId}`}
-              previewUrl={song.previewUrl}
-              onActionButtonClick={onActionButtonClick}
-            />
-          ))}
-        </GridLayout>
+        <GridLayout>{trackCards}</GridLayout>
       </TracksListContainer>
     </>
   );
@@ -107,7 +115,7 @@ export function ITunes({ dispatchRequestGetSongs, dispatchClearSongs, songs }) {
 ITunes.propTypes = {
   dispatchRequestGetSongs: PropTypes.func,
   dispatchClearSongs: PropTypes.func,
-  songs: PropTypes.array
+  songs: PropTypes.object
 };
 
 const mapStateToProps = createStructuredSelector({

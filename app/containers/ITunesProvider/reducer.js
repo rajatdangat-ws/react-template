@@ -7,7 +7,7 @@ import produce from 'immer';
 import get from 'lodash/get';
 import { createActions } from 'reduxsauce';
 
-export const initialState = { songs: [], error: null };
+export const initialState = { songs: {}, error: null };
 
 export const { Types: iTunesTypes, Creators: iTunesCreators } = createActions({
   requestGetSongs: ['searchTerm'],
@@ -27,7 +27,7 @@ export const iTunesProviderReducer = (state = initialState, action) =>
         break;
       case iTunesTypes.CLEAR_SONGS:
         draft.error = null;
-        draft.songs = [];
+        draft.songs = {};
         break;
       default:
         return state;

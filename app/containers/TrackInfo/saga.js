@@ -13,7 +13,14 @@ export function* getTrackInfoFunction(action) {
       const response = yield call(getSongDetails, action.songId);
       const { ok, data } = response;
       if (ok) {
-        yield put(successGetSongDetails((data?.results && data.results[0]) || {}));
+        const songDetails = data?.results && data.results[0];
+        if (songDetails) {
+          songDetails.releaseYear = songDetails?.releaseDate
+            ? new Date(songDetails.releaseDate).getFullYear().toString()
+            : 'NA';
+          songDetails.artworkUrl250 = songDetails.artworkUrl100.replace('100x100bb.jpg', '250x250bb.jpg');
+        }
+        yield put(successGetSongDetails(songDetails || {}));
       } else {
         yield put(errorGetSongDetails(data));
       }

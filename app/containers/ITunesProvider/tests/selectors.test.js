@@ -12,8 +12,8 @@ describe('ITunesProvider selector tests', () => {
   let error;
 
   beforeEach(() => {
-    songs = [
-      {
+    songs = {
+      1: {
         trackName: 'test track 1',
         trackId: 1,
         coverImgUrl: 'image url 1',
@@ -21,7 +21,7 @@ describe('ITunesProvider selector tests', () => {
         previewUrl: 'preview url 1',
         detailsUrl: 'details url 1'
       },
-      {
+      2: {
         trackName: 'test track 2',
         trackId: 2,
         coverImgUrl: 'image url 2',
@@ -29,7 +29,7 @@ describe('ITunesProvider selector tests', () => {
         previewUrl: 'preview url 2',
         detailsUrl: 'details url 2'
       }
-    ];
+    };
     error = 'There was an error while fetching the songs';
 
     mockedState = {
@@ -61,7 +61,7 @@ describe('ITunesProvider selector tests', () => {
 
   it('should select song by id', () => {
     const songByIdSelector = selectSongById(2);
-    expect(songByIdSelector(mockedState)).toEqual(songs[1]);
+    expect(songByIdSelector(mockedState)).toEqual(songs[2]);
   });
 
   it('should select global state', () => {

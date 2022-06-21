@@ -12,8 +12,8 @@ import userEvent from '@testing-library/user-event';
 import { ITunesTest as ITunes, mapDispatchToProps } from '../index';
 import { iTunesTypes } from '@app/containers/ITunesProvider/reducer';
 
-const songs = [
-  {
+const songs = {
+  1: {
     trackName: 'test track 1',
     trackId: 1,
     coverImgUrl: 'image url 1',
@@ -21,7 +21,7 @@ const songs = [
     previewUrl: 'preview url 1',
     detailsUrl: 'details url 1'
   },
-  {
+  2: {
     trackName: 'test track 2',
     trackId: 2,
     coverImgUrl: 'image url 2',
@@ -29,7 +29,7 @@ const songs = [
     previewUrl: 'preview url 2',
     detailsUrl: 'details url 2'
   }
-];
+};
 
 describe('<ITunes /> container tests', () => {
   // let submitSpy
@@ -83,7 +83,7 @@ describe('<ITunes /> container tests', () => {
     const { getAllByTestId } = renderProvider(
       <ITunes dispatchRequestGetSongs={() => {}} songs={songs} dispatchClearSongs={() => {}} />
     );
-    expect(getAllByTestId('music-info-card').length).toEqual(songs.length);
+    expect(getAllByTestId('music-info-card').length).toEqual(Object.keys(songs).length);
   });
 
   it('should validate mapDispatchToProps actions', async () => {
